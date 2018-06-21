@@ -1,0 +1,23 @@
+{
+  "name": "vidly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poojavpatel/vidly.git"
+  },
+  "author": "Pooja patel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Poojavpatel/vidly/issues"
+  },
+  "homepage": "https://github.com/Poojavpatel/vidly#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "joi": "^13.4.0"
+  }
+}
