@@ -44,17 +44,37 @@ app.post('/api/genres', (req,res) => {
 });
 
 //PUT requests update a genre
-
+app.put('/api/genres/:name' , (req ,res) => {
+    const genre = genres.find(c => c.name === req.params.name);
+    if(!genre){
+      return  res.status(404).send("this genre was not found");
+    }
+    const result = validateGenre(req.body); 
+    if(result.error){
+       return res.status(400).send("name is required and should be atleast 3 chars long");
+    }
+    if(req.body.name) genre.name = req.body.name;
+    if(req.body.movie) genre.movie = req.body.movie;
+    res.send(genre);
+});
 
 //DELETE requests delete a genre
-
+app.delete('/api/genres/:name' ,(req,res) => {
+    const genre = genres.find(c => c.name === req.params.name);
+    if(!genre){
+        return  res.status(404).send("this genre was not found");
+    }
+    const index = genres.indexOf(genre);
+    genres.splice(index , 1);
+    res.send(genre);
+});
 
 
 //Validating a genre
 function validateGenre(genre){
     const schema ={
         name : Joi.string().min(3).required(),
-        movie : Joi.string().min(3).required()
+        movie : Joi.string().min(3)
     };
     return Joi.validate(genre , schema);
 }
