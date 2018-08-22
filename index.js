@@ -6,6 +6,7 @@ const app = express();
 
 
 app.use(express.json());
+// if url has /api/genres , follow what is specified in generes.js
 app.use('/api/genres' , genres);
 
 //Routing

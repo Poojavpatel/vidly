@@ -9,6 +9,7 @@ genres = [
     { id:3 , name:"animation" , movie:"Incredibles2"}
 ];
 
+// means 'localhost:3000/api/genres/'
 router.get('/',(req ,res) => {
     res.send(genres);
 });
