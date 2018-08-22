@@ -40,6 +40,11 @@ router.post('/', (req,res) => {
     genres.push(genre);
     res.send(genre);
 });
+// Example of req body
+// {
+// 	"name":"biography",
+// 	"movie":"sanju"
+// }
 
 //PUT requests update a genre
 // url 'localhost:3000/api/genres/horror'
