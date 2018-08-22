@@ -9,12 +9,13 @@ genres = [
     { id:3 , name:"animation" , movie:"Incredibles2"}
 ];
 
-// means 'localhost:3000/api/genres/'
+// url 'localhost:3000/api/genres/'
 router.get('/',(req ,res) => {
     res.send(genres);
 });
 
 //GET requests view all genres
+// url 'localhost:3000/api/genres/horror'
 router.get('/:name',(req ,res) => {
     const a = req.params.name ;
     const genre = genres.find(c => c.name === a);
@@ -25,6 +26,7 @@ router.get('/:name',(req ,res) => {
 });
 
 //POST requests add a new genre
+// url 'localhost:3000/api/genres/'
 router.post('/', (req,res) => {
     const result = validateGenre(req.body); 
     if(result.error){
@@ -40,6 +42,7 @@ router.post('/', (req,res) => {
 });
 
 //PUT requests update a genre
+// url 'localhost:3000/api/genres/horror'
 router.put('/:name' , (req ,res) => {
     const genre = genres.find(c => c.name === req.params.name);
     if(!genre){
@@ -55,6 +58,7 @@ router.put('/:name' , (req ,res) => {
 });
 
 //DELETE requests delete a genre
+// url 'localhost:3000/api/genres/horror'
 router.delete('/:name' ,(req,res) => {
     const genre = genres.find(c => c.name === req.params.name);
     if(!genre){
