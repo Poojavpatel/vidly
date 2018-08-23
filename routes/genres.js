@@ -20,7 +20,6 @@ const genreSchema = mongoose.Schema({
 // 2.compiling schema into a model
 const Genre = mongoose.model( 'Genre' , genreSchema);
 
-
 // url 'localhost:3000/api/genres/'
 router.get('/',(req ,res) => {
     res.send(genres);
