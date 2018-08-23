@@ -2,12 +2,24 @@
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
+const mongoose = require('mongoose');
 
-genres = [
-    { id:1 , name:"horror" , movie:"Annabela"},
-    { id:2 , name:"romantic", movie:"Titanic"},
-    { id:3 , name:"animation" , movie:"Incredibles2"}
-];
+// we donot connect to db here instead we do that in index as we will be connecing for many apis
+
+// genres = [
+//     { id:1 , name:"horror" , movie:"Annabela"},
+//     { id:2 , name:"romantic", movie:"Titanic"},
+//     { id:3 , name:"animation" , movie:"Incredibles2"}
+// ];
+
+/* Instead of hardcoding this array we will use MongoDB(follow steps from mongodbtest/test repo)*/
+//1. Defining schema of genres
+const genreSchema = mongoose.Schema({
+    name:{ type:name, required:true, minlength:3, maxlength:50}
+});
+// 2.compiling schema into a model
+const Genre = mongoose.model( 'Genre' , genreSchema);
+
 
 // url 'localhost:3000/api/genres/'
 router.get('/',(req ,res) => {

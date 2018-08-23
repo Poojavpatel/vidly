@@ -3,7 +3,12 @@ const Joi = require('joi');
 const express = require('express');
 const genres = require('./routes/genres.js');
 const app = express();
+const mongoose = require('mongoose');
 
+// connecting to database
+mongoose.connect('mongodb://localhost/vidly')
+     .then(() => console.log('connected to MongoDB....'))
+     .catch(err => console.log('could not connect to MongoDB....',err));
 
 app.use(express.json());
 // if url has /api/genres , follow what is specified in generes.js

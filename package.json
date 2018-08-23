@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Poojavpatel/vidly#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "joi": "^13.4.0"
+    "joi": "^13.4.0",
+    "mongoose": "^5.2.9"
   }
 }
