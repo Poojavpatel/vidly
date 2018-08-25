@@ -67,18 +67,26 @@ router.post('/', async (req,res) => {
 
 //PUT requests update a genre
 // url 'localhost:3000/api/genres/horror'
-router.put('/:name' , (req ,res) => {
-    const genre = genres.find(c => c.name === req.params.name);
-    if(!genre){
+router.put('/:name' , async (req ,res) => {
+    // const genre = genres.find(c => c.name === req.params.name);
+    const reqgenre = await Genre.find({name:req.params.name});
+    const reqgenreid = reqgenre[0].name;
+    console.log('id of reqgenre', reqgenre.id);
+    if(!reqgenre){
       return  res.status(404).send("this genre was not found");
     }
-    const result = validateGenre(req.body); 
-    if(result.error){
-       return res.status(400).send("name is required and should be atleast 3 chars long");
-    }
-    if(req.body.name) genre.name = req.body.name;
-    if(req.body.movie) genre.movie = req.body.movie;
-    res.send(genre);
+    // const result = validateGenre(req.body); 
+    // if(result.error){
+    //    return res.status(400).send("name is required and should be atleast 3 chars long");
+    // }
+    // // if(req.body.name) genre.name = req.body.name;
+    // const course = await Course.findByIdAndUpdate(id,{
+    //     $set:{
+    //         author:'Aaron Nace',
+    //         isPublished:false
+    //     }
+    // } , {new:true});
+    res.send(reqgenre);
 });
 
 //DELETE requests delete a genre
