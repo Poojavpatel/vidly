@@ -15,13 +15,16 @@ const mongoose = require('mongoose');
 /* Instead of hardcoding this array we will use MongoDB(follow steps from mongodbtest/test repo)*/
 //1. Defining schema of genres
 const genreSchema = mongoose.Schema({
-    name:{ type:name, required:true, minlength:3, maxlength:50}
+    name:{ type:String, required:true, minlength:3, maxlength:50}
 });
 // 2.compiling schema into a model
 const Genre = mongoose.model( 'Genre' , genreSchema);
 
+
 // url 'localhost:3000/api/genres/'
-router.get('/',(req ,res) => {
+router.get('/',async (req ,res) => {
+    const genres = await Genre.find().sort('name');
+    console.log(genres);
     res.send(genres);
 });
 
