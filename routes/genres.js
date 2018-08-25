@@ -20,7 +20,7 @@ const genreSchema = mongoose.Schema({
 // 2.compiling schema into a model
 const Genre = mongoose.model( 'Genre' , genreSchema);
 
-
+//GET requests view all genres
 // url 'localhost:3000/api/genres/'
 router.get('/',async (req ,res) => {
     const genres = await Genre.find().sort('name');
@@ -28,11 +28,11 @@ router.get('/',async (req ,res) => {
     res.send(genres);
 });
 
-//GET requests view all genres
 // url 'localhost:3000/api/genres/horror'
-router.get('/:name',(req ,res) => {
+router.get('/:name',async (req ,res) => {
     const a = req.params.name ;
-    const genre = genres.find(c => c.name === a);
+    // const genre = genres.find(c => c.name === a);
+    const genre = await Genre.find({name:a});
     if(!genre){
       return  res.status(404).send("this genre was not found");
     }
@@ -41,18 +41,23 @@ router.get('/:name',(req ,res) => {
 
 //POST requests add a new genre
 // url 'localhost:3000/api/genres/'
-router.post('/', (req,res) => {
+router.post('/', async (req,res) => {
     const result = validateGenre(req.body); 
     if(result.error){
        return res.status(400).send("name and movie is rquired and should be atleast 3 chars long");
     }
-    const genre = {
-        id : genres.length +1 ,
-        name : req.body.name ,
-        movie : req.body.movie
-    };
-    genres.push(genre);
-    res.send(genre);
+    // const genre = {
+    //     id : genres.length +1 ,
+    //     name : req.body.name ,
+    //     movie : req.body.movie
+    // };
+    const genre = new Genre({
+		name: req.body.name
+	});
+    // genres.push(genre);
+    const resultgenre = await genre.save();
+    console.log('resultgenre', resultgenre);
+    res.send(resultgenre);
 });
 // Example of req body
 // {
