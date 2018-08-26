@@ -98,13 +98,15 @@ router.put('/:id' , async (req ,res) => {
 
 //DELETE requests delete a genre
 // url 'localhost:3000/api/genres/horror'
-router.delete('/:name' ,(req,res) => {
-    const genre = genres.find(c => c.name === req.params.name);
-    if(!genre){
-        return  res.status(404).send("this genre was not found");
-    }
-    const index = genres.indexOf(genre);
-    genres.splice(index , 1);
+router.delete('/:id' ,async (req,res) => {
+    // const genre = genres.find(c => c.name === req.params.name);
+    // if(!genre){
+    //     return  res.status(404).send("this genre was not found");
+    // }
+    // const index = genres.indexOf(genre);
+    // genres.splice(index , 1);
+    const genre = await Genre.findByIdAndRemove(id);
+    if(!genre){return  res.status(404).send("this genre was not found");}
     res.send(genre);
 });
 
