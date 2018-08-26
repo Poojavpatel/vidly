@@ -1,17 +1,13 @@
 /*jshint esversion: 6 */
+const {Customer,validateCustomer} = require('../models/customer.js')
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
 //1. Defining schema of genres
-const customerSchema = mongoose.Schema({
-    name:{ type:String, required:true, maxlength:50},
-    phone:{ type:Number, maxlength:10, minlength:10},
-    isGold:{ type:Boolean, default:false}
-});
 // 2.compiling schema into a model
-const Customer = mongoose.model( 'Customer' , customerSchema);
+// step 1 n 2 done in ./models/customer.js
 // 3.Route handlers
 
 //GET requests view all customers
@@ -75,13 +71,6 @@ router.delete('/:id' ,async (req,res) => {
 });
 
 //Validating a customer
-function validateCustomer(customer){
-    const schema ={
-        name : Joi.string().required(),
-        phone : Joi.number().min(10).max(10),
-        isGold : Joi.boolean()
-    };
-    return Joi.validate(customer , schema);
-}
+// moved to ./models/customer.js
 
 module.exports = router ;
