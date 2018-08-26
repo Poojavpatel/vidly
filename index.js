@@ -19,7 +19,8 @@ app.use('/api/customers' , customers);
 
 //Routing
 app.get('/' , (req , res) => {
-    res.send("Hello friends chai peelo");
+    // res.send("Welcome to Vidly - a video rental service");
+    res.sendFile('static/index.html');
 });
 
 
