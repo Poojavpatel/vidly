@@ -18,7 +18,8 @@ app.use('/api/genres' , genres);
 // if url has /api/customers , follow what is specified in customers.js
 app.use('/api/customers' , customers);
 
-//Routing
+
+app.use(express.static('static'));
 app.get('/' , (req , res) => {
     // res.send("Welcome to Vidly - a video rental service");
     res.sendFile(path.join(__dirname+'/static/index.html'));
