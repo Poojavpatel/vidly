@@ -66,15 +66,17 @@ router.post('/', async (req,res) => {
 // }
 
 //PUT requests update a genre
-// url 'localhost:3000/api/genres/horror'
-router.put('/:name' , async (req ,res) => {
+// url 'localhost:3000/api/genres/5b811bf4ac3c241c9920aa30'
+router.put('/:id' , async (req ,res) => {
     // const genre = genres.find(c => c.name === req.params.name);
-    const reqgenre = await Genre.find({name:req.params.name});
-    const reqgenreid = reqgenre[0].name;
-    console.log('id of reqgenre', reqgenre.id);
-    if(!reqgenre){
-      return  res.status(404).send("this genre was not found");
-    }
+    /*const reqgenre = await Genre.find({id:req.params.id});
+    reqgenre = [ { _id: 5b811bf4ac3c241c9920aa30, name: 'biography', __v: 0 } ] is of type object so we convert it into string with var b = JSON.stringify(reqgenre) we convert this string to json with  var d = JSON.parse(b); now we can access this json as var c = d[0] console.log('c', c) console.log(typeof c);
+    var foo =  JSON.parse(JSON.stringify(reqgenre));
+    console.log('foo', foo[0].name);
+    */
+    // if(!reqgenre){
+    //   return  res.status(404).send("this genre was not found");
+    // }
     // const result = validateGenre(req.body); 
     // if(result.error){
     //    return res.status(400).send("name is required and should be atleast 3 chars long");
@@ -86,7 +88,12 @@ router.put('/:name' , async (req ,res) => {
     //         isPublished:false
     //     }
     // } , {new:true});
-    res.send(reqgenre);
+    const result = validateGenre(req.body); 
+    if(result.error){return res.status(400).send("name is required and should be atleast 3 chars long");}
+    const genre = await Genre.findByIdAndUpdate(req.params.id,{$set:{name:req.body.name}} , {new:true});
+    if(!genre){return  res.status(404).send("this genre was not found");}
+    console.log('genre', genre);
+    res.send(genre);
 });
 
 //DELETE requests delete a genre
