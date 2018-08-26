@@ -105,7 +105,7 @@ router.delete('/:id' ,async (req,res) => {
     // }
     // const index = genres.indexOf(genre);
     // genres.splice(index , 1);
-    const genre = await Genre.findByIdAndRemove(id);
+    const genre = await Genre.findByIdAndRemove(req.params.id);
     if(!genre){return  res.status(404).send("this genre was not found");}
     res.send(genre);
 });
