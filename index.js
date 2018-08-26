@@ -5,6 +5,7 @@ const genres = require('./routes/genres.js');
 const customers = require('./routes/customers.js')
 const app = express();
 const mongoose = require('mongoose');
+const path = require("path");
 
 // connecting to database
 mongoose.connect('mongodb://localhost/vidly')
@@ -20,7 +21,7 @@ app.use('/api/customers' , customers);
 //Routing
 app.get('/' , (req , res) => {
     // res.send("Welcome to Vidly - a video rental service");
-    res.sendFile('static/index.html');
+    res.sendFile(path.join(__dirname+'/static/index.html'));
 });
 
 
