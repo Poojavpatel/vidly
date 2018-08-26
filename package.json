@@ -7,6 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"node index.js"
   },
+  "engines":{
+    "node":"10.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Poojavpatel/vidly.git"
