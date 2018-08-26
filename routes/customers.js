@@ -1,5 +1,5 @@
 /*jshint esversion: 6 */
-const {Customer,validateCustomer} = require('../models/customer.js')
+const {Customer,validateCustomer} = require('../models/customers');
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');

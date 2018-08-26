@@ -12,7 +12,6 @@ const customerSchema = mongoose.Schema({
 const Customer = mongoose.model( 'Customer' , customerSchema);
 
 //Validating a customer
-// moved to ./models/customer.js
 function validateCustomer(customer){
     const schema ={
         name : Joi.string().required(),

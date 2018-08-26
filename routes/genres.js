@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+const {Genre,validateGenre} = require('../models/genres');
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi');
@@ -14,11 +15,8 @@ const mongoose = require('mongoose');
 
 /* Instead of hardcoding this array we will use MongoDB(follow steps from mongodbtest/test repo)*/
 //1. Defining schema of genres
-const genreSchema = mongoose.Schema({
-    name:{ type:String, required:true, minlength:3, maxlength:50}
-});
 // 2.compiling schema into a model
-const Genre = mongoose.model( 'Genre' , genreSchema);
+// step 1 n 2 done in ./models/genres.js
 
 //GET requests view all genres
 // url 'localhost:3000/api/genres/'
@@ -111,12 +109,6 @@ router.delete('/:id' ,async (req,res) => {
 });
 
 //Validating a genre
-function validateGenre(genre){
-    const schema ={
-        name : Joi.string().min(3).required(),
-        movie : Joi.string().min(3)
-    };
-    return Joi.validate(genre , schema);
-}
+// moved to ./models/genres.js
 
 module.exports = router ;
