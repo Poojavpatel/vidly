@@ -1,6 +1,5 @@
 /*jshint esversion: 6 */
 /* all code for defining and validaing movie */
-const Joi = require('joi');
 const mongoose = require('mongoose');
 const genreSchema = require('./genres.js').genreSchema;
 
