@@ -3,6 +3,7 @@ const Joi = require('joi');
 const express = require('express');
 const genres = require('./routes/genres.js');
 const customers = require('./routes/customers.js')
+const movies = require('./routes/movies.js')
 const app = express();
 const mongoose = require('mongoose');
 const path = require("path");
@@ -17,6 +18,8 @@ app.use(express.json());
 app.use('/api/genres' , genres);
 // if url has /api/customers , follow what is specified in customers.js
 app.use('/api/customers' , customers);
+// if url has /api/movies , follow what is specified in movies.js
+app.use('/api/movies' , movies);
 
 
 app.use(express.static('static'));
