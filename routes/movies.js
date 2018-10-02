@@ -1,5 +1,6 @@
 /*jshint esversion: 6 */
 const {Movie,validateMovie} = require('../models/movies.js');
+const Genre = require('../models/genres.js').Genre;
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -17,11 +18,18 @@ router.get('/',async (req ,res) => {
 router.post('/', async (req,res) => {
     const result = validateMovie(req.body); 
     if(result.error){
-       return res.status(400).send("title is required and should be atleast 3 chars long");
+       return res.status(400).send(result.error.details[0].message);
+    }
+    const genre = Genre.findById(req.body.genreId);
+    if (!genre) {
+        return res.status(400).send("Invalid genre");
     }
     const movie = new Movie({
         title: req.body.title,
-        genre: req.body.genre,
+        genre: {
+            _id:genre._id,
+            name:genre.name
+        },
         numberInStock: req.body.numberInStock,
         dailyRentalRate: req.body.dailyRentalRate
 	});
@@ -32,7 +40,7 @@ router.post('/', async (req,res) => {
 // Example of req body
 // {
 //     "title":"24 hours",
-//     "genre":"5b8267ba016edc22fee53e3e",
+//     "genreId":"5b8267ba016edc22fee53e3e",
 //     "numberInStock":2,
 //     "dailyRentalRate":500
 // }
