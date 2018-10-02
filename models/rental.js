@@ -10,15 +10,14 @@ const rentalSchema = mongoose.Schema({
         type:new mongoose.Schema({
             name:{type:String, required:true, },
             isGold:{type:Boolean, default:false},
-            phone:{type:String, required:true}
+            phone:{type:String}
         }),
         required:true
     },
     movie:{
         type:new mongoose.Schema({
             title:{type:String, required:true, },
-            dailyRentalRate:{type:Number},
-            phone:{type:String, required:true}
+            dailyRentalRate:{type:Number}
         }),
         required:true
     },

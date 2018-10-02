@@ -2,11 +2,12 @@
 const {Rental,validateRental} = require('../models/rental.js');
 const Movie = require('../models/movies').Movie;
 const Customer = require('../models/customers.js').Customer;
-const express = require('express');
-const router = express.Router();
 const mongoose = require('mongoose');
 const Fawn = require('fawn');
-Fawn.init('mongoose');
+const express = require('express');
+const router = express.Router();
+
+Fawn.init(mongoose);
 
 //GET requests view all rental
 // url 'localhost:3000/api/rentals/'
