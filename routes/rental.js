@@ -49,9 +49,9 @@ router.post('/', async (req,res) => {
     movie.save();
     console.log('resultmovie', resultmovie);
     res.send(resultmovie);
-    // renal.save() and movie.save() should be atomic 
-    // both should complete or both rollback 
-    // hence we use a transaction
+    // renal.save() and movie.save() should be atomic both should complete or both rollback 
+    // hence we should use transaction in sql dbs or two faced commit in mongodb but its advanced topic
+    // we use an npm package that simulates transacton 
 });
 // Example of req body
 // {
