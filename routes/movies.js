@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 const {Movie,validateMovie} = require('../models/movies.js');
-const Genre = require('../models/genres.js').Genre;
+const {Genre} = require('../models/genres.js');
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');

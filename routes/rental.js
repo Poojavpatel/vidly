@@ -5,6 +5,8 @@ const Customer = require('../models/customers.js').Customer;
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
+const Fawn = require('fawn');
+Fawn.init('mongoose');
 
 //GET requests view all rental
 // url 'localhost:3000/api/rentals/'
@@ -43,19 +45,30 @@ router.post('/', async (req,res) => {
             title:movie.title,
             dailyRentalRate:movie.dailyRentalRate
         }
-	});
-    const resultrental = await rental.save();
-    movie.numberInStock--;
-    movie.save();
-    console.log('resultmovie', resultmovie);
-    res.send(resultmovie);
+    });
+    // const resultrental = await rental.save();
+    // movie.numberInStock--;
+    // movie.save();
+    // console.log('resultmovie', resultmovie);
+    // res.send(resultmovie);
     // renal.save() and movie.save() should be atomic both should complete or both rollback 
     // hence we should use transaction in sql dbs or two faced commit in mongodb but its advanced topic
-    // we use an npm package that simulates transacton 
+    // we use an npm package that simulates transacton
+    try {
+        new Fawn.Task()
+            .save('rentals',rental)
+            .update('movies',{_id:movie_id},{ $inc:{numberInStock:-1}})
+            .run()
+        console.log('rental', rental);
+        res.send(rental) 
+    } catch (error) {
+        res.status(500).send("Internal server error...");
+    }  
 });
 // Example of req body
 // {
-//     
+// 	"customerId":"5b828917ad5983369495a321",
+// 	"movieId":"5bb3d85d490fc21572a71510"
 // }
 
 module.exports = router ;
