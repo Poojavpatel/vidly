@@ -17,6 +17,16 @@ router.get('/',async (req ,res) => {
     res.send(rentals);
 });
 
+//GET requests view specific rental
+// url 'localhost:3000/api/rentals/:id'
+router.get('/:id', async (req, res) => {
+    const rental = await Rental.findById(req.params.id);
+    if (!rental){
+        return res.status(404).send('The rental with the given ID was not found.');
+    }
+    res.send(rental);
+});
+
 //POST requests add a new rental
 // url 'localhost:3000/api/rentals/'
 router.post('/', async (req,res) => {
@@ -24,11 +34,11 @@ router.post('/', async (req,res) => {
     if(result.error){
        return res.status(400).send(result.error.details[0].message);
     }
-    const customer = Customer.findById(req.body.customerId);
+    const customer =await Customer.findById(req.body.customerId);
     if (!customer) {
         return res.status(400).send("Invalid customer");
     }
-    const movie = Movie.findById(req.body.movieId);
+    const movie =await Movie.findById(req.body.movieId);
     if (!movie) {
         return res.status(400).send("Invalid movie");
     }
