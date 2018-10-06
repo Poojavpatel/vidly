@@ -1,10 +1,9 @@
 /*jshint esversion: 6 */
-const Joi = require('joi');
 const express = require('express');
 const genres = require('./routes/genres.js');
-const customers = require('./routes/customers.js')
-const movies = require('./routes/movies.js')
-const rental = require('./routes/rental.js')
+const customers = require('./routes/customers.js');
+const movies = require('./routes/movies.js');
+const rentals = require('./routes/rentals.js');
 const app = express();
 const mongoose = require('mongoose');
 const path = require("path");
@@ -20,7 +19,7 @@ app.use('/api/genres' , genres);
 // if url has /api/customers , follow what is specified in customers.js
 app.use('/api/customers' , customers);
 app.use('/api/movies' , movies);
-app.use('/api/rentals', rental);
+app.use('/api/rentals', rentals);
 
 
 app.use(express.static('static'));
