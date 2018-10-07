@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 /* all code for defining and validaing rental */
 const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
 
 // here we are not reusing customer and movies schemas
@@ -30,8 +31,8 @@ const Rental = mongoose.model( 'Rental' , rentalSchema);
 //Validating a rental
 function validateRental(rental){
     const schema ={
-        customerId:Joi.string().required(),
-        movieId:Joi.string().required()
+        customerId:Joi.objectId().required(),
+        movieId:Joi.objectId().required()
     };
     return Joi.validate(rental , schema);
 }
