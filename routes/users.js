@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const {User,validateUser} = require('../models/users');
 const express = require('express');
@@ -18,7 +19,9 @@ router.post('/', async (req,res) => {
     if(user) return res.status(400).send("User already registered");
 
     user = new User(_.pick(req.body, ['name','email','password']));
-    
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password,salt);
+
     await user.save();
 
     res.send( _.pick(user,['_id','name','email']));
