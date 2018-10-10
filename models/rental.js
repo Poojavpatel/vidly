@@ -1,7 +1,8 @@
 /*jshint esversion: 6 */
 /* all code for defining and validaing rental */
 const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
+// Joi.objectId = require('joi-objectid')(Joi);
+// moving it to index.js as it will be used in many modules
 const mongoose = require('mongoose');
 
 // here we are not reusing customer and movies schemas

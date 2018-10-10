@@ -1,5 +1,7 @@
 /*jshint esversion: 6 */
 const express = require('express');
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 const genres = require('./routes/genres.js');
 const customers = require('./routes/customers.js');
 const movies = require('./routes/movies.js');
