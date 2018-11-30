@@ -16,11 +16,11 @@ router.get('/',async (req ,res) => {
 //POST requests add a new movie
 // url 'localhost:3000/api/movies/'
 router.post('/', async (req,res) => {
-    const result = validateMovie(req.body); 
+    const result = validateMovie(req.body);
     if(result.error){
        return res.status(400).send(result.error.details[0].message);
     }
-    const genre = Genre.findById(req.body.genreId);
+    const genre =await Genre.findById(req.body.genreId);
     if (!genre) {
         return res.status(400).send("Invalid genre");
     }
@@ -44,5 +44,13 @@ router.post('/', async (req,res) => {
 //     "numberInStock":2,
 //     "dailyRentalRate":500
 // }
+
+//DELETE requests delete a movie
+// url 'localhost:3000/api/movies/5b8267a8016edc22fee53e3d'
+router.delete('/:id' ,async (req,res) => {
+    const movie = await Movie.findByIdAndRemove(req.params.id);
+    if(!movie){return  res.status(404).send("this movie was not found");}
+    res.send(movie);
+});
 
 module.exports = router ;

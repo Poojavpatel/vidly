@@ -26,7 +26,7 @@ router.get('/',async (req ,res) => {
     res.send(genres);
 });
 
-// url 'localhost:3000/api/genres/horror'
+// url 'localhost:3000/api/genres/Horror'
 router.get('/:name',async (req ,res) => {
     const a = req.params.name ;
     // const genre = genres.find(c => c.name === a);
@@ -95,7 +95,7 @@ router.put('/:id' , async (req ,res) => {
 });
 
 //DELETE requests delete a genre
-// url 'localhost:3000/api/genres/horror'
+// url 'localhost:3000/api/genres/5b8267a8016edc22fee53e3d'
 router.delete('/:id' ,async (req,res) => {
     // const genre = genres.find(c => c.name === req.params.name);
     // if(!genre){

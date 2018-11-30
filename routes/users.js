@@ -9,6 +9,14 @@ const router = express.Router();
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+//GET requests view all users
+// url 'localhost:3000/api/users/'
+router.get('/',async (req ,res) => {
+    const users = await User.find().sort('name');
+    console.log(users);
+    res.send(users);
+});
+
 //POST requests add a new user
 // url 'localhost:3000/api/users/'
 router.post('/', async (req,res) => {

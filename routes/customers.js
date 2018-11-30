@@ -18,7 +18,7 @@ router.get('/',async (req ,res) => {
     res.send(customers);
 });
 
-// url 'localhost:3000/api/customers/mamu'
+// url 'localhost:3000/api/customers/Mamu'
 router.get('/:name',async (req ,res) => {
     const a = req.params.name ;
     const customer = await Customer.find({name:a});
@@ -47,7 +47,7 @@ router.post('/', async (req,res) => {
 // Example of req body
 // {
 // 	"name":"Priya",
-// 	"phone":0123456789,
+// 	"phone":"1234567890",
 //  "isGold":true
 // }
 
@@ -63,7 +63,7 @@ router.put('/:id' , async (req ,res) => {
 });
 
 //DELETE requests delete a customer
-// url 'localhost:3000/api/customers/horror'
+// url 'localhost:3000/api/customers/5c00f0f4b84f0e36182c62d6'
 router.delete('/:id' ,async (req,res) => {
     const customer = await Customer.findByIdAndRemove(req.params.id);
     if(!customer){return  res.status(404).send("this customer was not found");}
