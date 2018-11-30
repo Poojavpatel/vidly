@@ -1,5 +1,7 @@
 /*jshint esversion: 6 */
 /* all code for defining and validaing a user */
+const config = require('config');
+const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
@@ -8,6 +10,10 @@ const userSchema = mongoose.Schema({
     email:{ type:String, unique:true, required:true, minlength:3, maxlength:50 },
     password:{ type:String, required:true ,minlength:3 }
 });
+userSchema.methods.generateAuthToken = function() {
+    // jwt.sign({Payload},'anyPrivateKeyAsAString') jwt.sign() returns a token
+    return token = jwt.sign({_id:this.id},'jwtPrivateKey');
+}
 const User = mongoose.model( 'User' , userSchema);
 
 //Validating a user

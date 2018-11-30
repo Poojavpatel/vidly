@@ -40,6 +40,8 @@ router.get('/:name',async (req ,res) => {
 //POST requests add a new genre
 // url 'localhost:3000/api/genres/'
 router.post('/', async (req,res) => {
+    // Making sure user is authenticated to post
+
     const result = validateGenre(req.body); 
     if(result.error){
        return res.status(400).send("name and movie is rquired and should be atleast 3 chars long");

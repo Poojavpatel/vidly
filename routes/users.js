@@ -34,8 +34,7 @@ router.post('/', async (req,res) => {
 
     await user.save();
 
-    // Returning json web token as an header of response
-    const token = jwt.sign({_id:user.id},'jwtPrivateKey');
+    const token = user.generateAuthToken()
     res.header('x-auth-token',token).send( _.pick(user,['_id','name','email']));
 });
 // Example of req body
