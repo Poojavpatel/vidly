@@ -1,4 +1,5 @@
 /*jshint esversion: 6 */
+const config = require('config');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
